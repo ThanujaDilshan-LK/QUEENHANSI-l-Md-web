@@ -3,171 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUEENHANSI-MD - WhatsApp Bot Official Web</title>
+    <title>QUEENHANSI-MD | Pair Code</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Background Grid / Animation -->
-    <div class="bg-glow"></div>
-
-    <!-- Navigation Bar -->
-    <header class="navbar">
-        <div class="nav-brand" onclick="showSection('home')">
-            <i class="fa-solid fa-robot"></i> QUEENHANSI-MD
+    <div class="main-container">
+        <!-- Logo / Title -->
+        <div class="header">
+            <img src="https://github.com/fluidicon.png" alt="Logo" class="logo">
+            <h1>QUEENHANSI-MD</h1>
+            <p>Enter your WhatsApp number to get the Pair Code</p>
         </div>
-        <div class="nav-buttons">
-            <button class="nav-btn buy-btn" onclick="showSection('buy')">
-                <i class="fa-solid fa-cart-shopping"></i> BUY
+
+        <!-- Input Section -->
+        <div class="card">
+            <div class="input-group">
+                <span class="icon"><i class="fa-brands fa-whatsapp"></i></span>
+                <input type="text" id="phoneNumber" placeholder="Example: 94741933159" autocomplete="off">
+            </div>
+            
+            <button class="submit-btn" onclick="getPairCode()" id="submitBtn">
+                GET PAIR CODE
             </button>
-            <button class="nav-btn pair-btn" onclick="showSection('pair')">
-                <i class="fa-solid fa-qrcode"></i> PAIR CODE
-            </button>
+
+            <!-- Loading Spinner -->
+            <div class="loading" id="loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> Generating your code...
+            </div>
+
+            <!-- Result Display -->
+            <div class="result-container" id="resultContainer">
+                <p class="instruction">Your Pair Code is ready!</p>
+                <div class="code-box">
+                    <span id="pairCodeDisplay">----</span>
+                    <button class="copy-btn" onclick="copyCode()"><i class="fa-regular fa-copy"></i></button>
+                </div>
+            </div>
         </div>
-    </header>
 
-    <main class="container">
-
-        <!-- HOME SECTION -->
-        <section id="home-section" class="content-section active">
-            <div class="hero">
-                <h1 class="main-title">QUEENHANSI-MD <span class="badge">V2.0</span></h1>
-                <p class="subtitle">Fast, Reliable & Feature-Rich WhatsApp Multi-Device Bot.</p>
-
-                <div class="action-btn-group">
-                    <button onclick="showSection('buy')" class="btn btn-green">
-                        <i class="fa-solid fa-bolt"></i> Get Bot Now
-                    </button>
-                    <button onclick="showSection('pair')" class="btn btn-dark">
-                        <i class="fa-solid fa-key"></i> Get Pair Code
-                    </button>
-                </div>
+        <!-- Footer -->
+        <div class="footer">
+            <p>Developed by <span>QUEENHANSI-MD</span> &copy; 2026</p>
+            <div class="social-links">
+                <button onclick="buyBot()" class="buy-link"><i class="fa-solid fa-cart-shopping"></i> Buy Bot Script</button>
             </div>
-
-            <div class="feature-card-grid">
-                <div class="card">
-                    <i class="fa-solid fa-wand-magic-sparkles card-icon"></i>
-                    <h3>Fully Customizable</h3>
-                    <p>Change Bot Name, Prefix, Work Type, and Footers according to your preference.</p>
-                </div>
-
-                <div class="card">
-                    <i class="fa-solid fa-gauge-high card-icon"></i>
-                    <h3>Blazing Fast Speed</h3>
-                    <p>Optimized speed with minimal response delay and 99.9% uptime capability.</p>
-                </div>
-
-                <div class="card">
-                    <i class="fa-solid fa-shield-halved card-icon"></i>
-                    <h3>Secure & Anti-Ban</h3>
-                    <p>Advanced security modules protecting your WhatsApp account safely.</p>
-                </div>
-            </div>
-
-            <!-- Features Box -->
-            <div class="section-box">
-                <h2><i class="fa-solid fa-star green-text"></i> Main Bot Features</h2>
-                <div class="list-item"><i class="fa-solid fa-shield-cat green-text"></i> Anti-Delete & Anti-View Once Message Saver</div>
-                <div class="list-item"><i class="fa-solid fa-download green-text"></i> Media Downloader (TikTok, FB, YT, Spotify, Movies)</div>
-                <div class="list-item"><i class="fa-solid fa-user-group green-text"></i> Group Management Tools (Mute, Unmute, Kick, Promote)</div>
-                <div class="list-item"><i class="fa-solid fa-image green-text"></i> Auto Sticker Maker & Image AI Tools</div>
-            </div>
-        </section>
-
-        <!-- PAIR CODE SECTION (PRABATH.TOP STYLE) -->
-        <section id="pair-section" class="content-section">
-            <div class="pair-box">
-                <div class="icon-header">
-                    <i class="fa-solid fa-mobile-screen-button green-text"></i>
-                </div>
-                <h2>Get Pair Code</h2>
-                <p>Enter your WhatsApp Number with Country Code (without +)</p>
-
-                <div class="input-container">
-                    <input type="text" id="phone" placeholder="e.g. 94741933159" autocomplete="off">
-                    <button class="btn btn-green full-width" onclick="getPairCode()">
-                        <i class="fa-solid fa-paper-plane"></i> Submit
-                    </button>
-                </div>
-
-                <!-- Code Output Container -->
-                <div id="pair-result" class="pair-result"></div>
-            </div>
-        </section>
-
-        <!-- BUY / PRICING SECTION -->
-        <section id="buy-section" class="content-section">
-            <h1 class="orange-title">Deployment Packages</h1>
-            <p class="subtitle">Select your plan and connect directly via WhatsApp.</p>
-
-            <div class="pricing-grid">
-                <!-- Basic Plan -->
-                <div class="price-card">
-                    <div class="plan-badge">Popular</div>
-                    <h3>Basic Plan</h3>
-                    <div class="price">LKR <span>350</span></div>
-                    <div class="validity">1 Month Access</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check green-text"></i> QUEENHANSI-MD Bot 24/7</li>
-                        <li><i class="fa-solid fa-check green-text"></i> High Speed Download Server</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Full Admin Commands</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Free Technical Support</li>
-                    </ul>
-                    <button class="btn btn-blue full-width" onclick="buyPlan('Basic Plan', '350')">
-                        <i class="fa-brands fa-whatsapp"></i> Buy Basic Plan
-                    </button>
-                </div>
-
-                <!-- Standard Plan -->
-                <div class="price-card highlight">
-                    <div class="plan-badge highlight-badge">Best Value</div>
-                    <h3>Standard Plan</h3>
-                    <div class="price">LKR <span>900</span></div>
-                    <div class="validity">3 Months Access</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check green-text"></i> QUEENHANSI-MD Bot 24/7</li>
-                        <li><i class="fa-solid fa-check green-text"></i> High Speed Download Server</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Full Admin Commands</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Priority Technical Support</li>
-                    </ul>
-                    <button class="btn btn-green full-width" onclick="buyPlan('Standard Plan', '900')">
-                        <i class="fa-brands fa-whatsapp"></i> Buy Standard Plan
-                    </button>
-                </div>
-
-                <!-- Premium Plan -->
-                <div class="price-card">
-                    <div class="plan-badge">VIP</div>
-                    <h3>Premium Plan</h3>
-                    <div class="price">LKR <span>1400</span></div>
-                    <div class="validity">5 Months Access</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check green-text"></i> QUEENHANSI-MD Bot 24/7</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Unlimited Download Speeds</li>
-                        <li><i class="fa-solid fa-check green-text"></i> Custom Bot Branding</li>
-                        <li><i class="fa-solid fa-check green-text"></i> 24/7 VIP Direct Support</li>
-                    </ul>
-                    <button class="btn btn-purple full-width" onclick="buyPlan('Premium Plan', '1400')">
-                        <i class="fa-brands fa-whatsapp"></i> Buy Premium Plan
-                    </button>
-                </div>
-            </div>
-
-            <!-- Payment Info -->
-            <div class="section-box">
-                <h2><i class="fa-solid fa-wallet"></i> Payment Methods</h2>
-                <div class="payment-method"><i class="fa-solid fa-building-columns green-text"></i> <strong>Bank Deposit / Transfer:</strong> Commercial Bank</div>
-                <div class="payment-method"><i class="fa-solid fa-mobile-retro green-text"></i> <strong>Dialog Reload / Card:</strong> Accepted</div>
-                <div class="payment-method"><i class="fa-brands fa-bitcoin green-text"></i> <strong>Crypto / Binance Pay:</strong> USDT</div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        Designed & Powered by <span class="green-text">QUEENHANSI-MD</span> © 2026
-    </footer>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
