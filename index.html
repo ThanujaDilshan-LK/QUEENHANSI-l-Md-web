@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEENHANSI-MD - Ultimate WhatsApp Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="stars"></div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand" onclick="showSection('home')">QUEENHANSI-MD</div>
+        <div class="nav-buttons">
+            <button class="nav-btn buy-btn" onclick="showSection('buy')"><i class="fa-solid fa-credit-card"></i> BUY</button>
+            <button class="nav-btn pair-btn" onclick="showSection('pair')"><i class="fa-solid fa-qrcode"></i> PAIR</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- HOME SECTION -->
+        <section id="home-section" class="content-section active">
+            <h1 class="main-title">QUEENHANSI-MD <span class="sub-tag">Next</span></h1>
+            <p class="subtitle">Deploy effortlessly, manage intuitively, and enjoy powerful features.</p>
+
+            <div class="action-btn-group">
+                <button onclick="showSection('buy')" class="btn btn-green"><i class="fa-solid fa-rocket"></i> Sign Up Now</button>
+                <button onclick="showSection('pair')" class="btn btn-dark"><i class="fa-solid fa-right-to-bracket"></i> Get Pair Code</button>
+            </div>
+
+            <div class="feature-card-grid">
+                <div class="card">
+                    <i class="fa-solid fa-gear card-icon"></i>
+                    <h3>Fully Customizable</h3>
+                    <p>Modify the "Bot Name", "Bot Footer", and more to create a unique experience.</p>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-bolt card-icon"></i>
+                    <h3>Blazing Fast</h3>
+                    <p>Built on a modern stack for unparalleled speed, reliability, and low latency.</p>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-shield-halved card-icon"></i>
+                    <h3>Secure & Reliable</h3>
+                    <p>Your security is vital. High-end encryption and safety features built-in.</p>
+                </div>
+            </div>
+
+            <!-- Core Features List -->
+            <div class="section-box">
+                <h2><i class="fa-solid fa-circle-check green-text"></i> Core Features</h2>
+                <div class="list-item"><i class="fa-solid fa-shield"></i> Anti delete - Retrieve deleted messages instantly.</div>
+                <div class="list-item"><i class="fa-solid fa-eye-slash"></i> Anti view once - Save images & videos sent in view once.</div>
+                <div class="list-item"><i class="fa-solid fa-user-slash"></i> Anti mention & Anti link - Keep groups clean from spammers.</div>
+                <div class="list-item"><i class="fa-solid fa-download"></i> Media Downloader - Download TikTok, FB, YT, Spotify & Movie files up to 2GB.</div>
+            </div>
+        </section>
+
+        <!-- PAIR CODE SECTION -->
+        <section id="pair-section" class="content-section">
+            <div class="pair-box">
+                <h2 class="green-text">Get Pair Code</h2>
+                <p>Enter your WhatsApp number to get a pair code.</p>
+                <div class="input-group">
+                    <input type="text" id="phone" placeholder="e.g., 94741933159">
+                    <button class="btn btn-green full-width" onclick="getPairCode()">Get Code</button>
+                </div>
+                <div id="pair-result" class="pair-result"></div>
+            </div>
+        </section>
+
+        <!-- BUY / PRICING SECTION -->
+        <section id="buy-section" class="content-section">
+            <h1 class="orange-title">Managed Deployment Plans</h1>
+            <p class="subtitle">Choose a plan that fits your needs.</p>
+
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="price-card">
+                    <h3>Basic Plan</h3>
+                    <div class="price">LKR <span>350</span></div>
+                    <div class="validity">Validity - 1 Month</div>
+                    <ul>
+                        <li><i class="fa-solid fa-robot green-text"></i> QUEENHANSI-MD Bot 24/7</li>
+                        <li><i class="fa-solid fa-download green-text"></i> Up to 2GB file downloads</li>
+                        <li><i class="fa-solid fa-lock-open green-text"></i> Full access to bot features</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles green-text"></i> Fully Customizable</li>
+                    </ul>
+                    <button class="btn btn-blue full-width" onclick="buyPlan('Basic Plan', '350')">Buy Basic Plan</button>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="price-card highlight">
+                    <h3>Standard Plan</h3>
+                    <div class="price">LKR <span>900</span></div>
+                    <div class="validity">Validity - 3 Months</div>
+                    <ul>
+                        <li><i class="fa-solid fa-robot green-text"></i> QUEENHANSI-MD Bot 24/7</li>
+                        <li><i class="fa-solid fa-download green-text"></i> Up to 2GB file downloads</li>
+                        <li><i class="fa-solid fa-lock-open green-text"></i> Full access to bot features</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles green-text"></i> Fully Customizable</li>
+                    </ul>
+                    <button class="btn btn-green full-width" onclick="buyPlan('Standard Plan', '900')">Buy Standard Plan</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="price-card">
+                    <h3>Premium Plan</h3>
+                    <div class="price">LKR <span>1400</span></div>
+                    <div class="validity">Validity - 5 Months</div>
+                    <ul>
+                        <li><i class="fa-solid fa-robot green-text"></i> QUEENHANSI-MD Bot 24/7</li>
+                        <li><i class="fa-solid fa-download green-text"></i> Up to 2GB file downloads</li>
+                        <li><i class="fa-solid fa-lock-open green-text"></i> Full access to bot features</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles green-text"></i> Fully Customizable</li>
+                    </ul>
+                    <button class="btn btn-purple full-width" onclick="buyPlan('Premium Plan', '1400')">Buy Premium Plan</button>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="section-box payment-box">
+                <h2><i class="fa-solid fa-credit-card"></i> Payment Methods</h2>
+                <p class="subtitle-left">We accept multiple payment methods. After payment, send the receipt to our WhatsApp number for verification.</p>
+                <div class="payment-method"><i class="fa-solid fa-building-columns green-text"></i> <strong>Bank Transfer:</strong> Commercial Bank PLC</div>
+                <div class="payment-method"><i class="fa-solid fa-mobile-retro green-text"></i> <strong>Dialog Reload / Card:</strong> Any denomination</div>
+                <div class="payment-method"><i class="fa-brands fa-bitcoin green-text"></i> <strong>Binance Pay (Crypto):</strong> USDT</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        Crafted by <span class="green-text">QUEENHANSI-MD</span> © 2026 All rights reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
