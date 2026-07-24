@@ -1,82 +1,65 @@
-// Section Navigation Logic
-function showSection(sectionName) {
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-
-    if (sectionName === 'buy') {
-        document.getElementById('buy-section').classList.add('active');
-    } else if (sectionName === 'pair') {
-        document.getElementById('pair-section').classList.add('active');
-    } else {
-        document.getElementById('home-section').classList.add('active');
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Direct Buy Order to WhatsApp Number (0741933159)
-function buyPlan(planName, price) {
-    const phoneNumber = "94741933159"; // Your WhatsApp Number
-    const message = `Hello QUEENHANSI-MD Admin,\n\nI want to buy the *${planName}* (LKR ${price}).\nPlease send me bank account / payment details.`;
-    
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
-// Real-Time Pair Code Functionality (prabath.top Style)
 async function getPairCode() {
-    const phoneInput = document.getElementById('phone').value.trim();
-    const resultDiv = document.getElementById('pair-result');
+    const phoneInput = document.getElementById('phoneNumber').value.trim();
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingDiv = document.getElementById('loading');
+    const resultContainer = document.getElementById('resultContainer');
+    const pairCodeDisplay = document.getElementById('pairCodeDisplay');
 
-    if (!phoneInput || phoneInput.length < 10) {
-        resultDiv.innerHTML = `<p style="color: #ff5252; margin-top: 15px; font-weight: bold;">Please enter a valid WhatsApp number with country code!</p>`;
+    // Phone number validation
+    if (!phoneInput) {
+        alert("Please enter your WhatsApp number.");
         return;
     }
 
-    resultDiv.innerHTML = `<p style="color: #00e676; margin-top: 15px;"><i class="fa-solid fa-spinner fa-spin"></i> Connecting to Pair Server...</p>`;
+    // Hide previous results & show loading
+    submitBtn.style.display = 'none';
+    resultContainer.style.display = 'none';
+    loadingDiv.style.display = 'block';
 
     try {
-        // [IMPORTANT] Replace this URL with your active Baileys Pair Code API server URL if you have one.
-        // E.g., const response = await fetch(`https://your-pair-server.onrender.com/code?number=${phoneInput}`);
+        // මෙතනට ඔයාගේ Backend API ලින්ක් එක දාන්න පුළුවන් (e.g., Render URL)
+        // const response = await fetch(`https://your-api.onrender.com/code?number=${phoneInput}`);
         
-        // Simulating Backend API Request
+        // Backend එකක් නැති නිසා, තත්පර 2කින් Code එකක් generate වෙන විදිහට හදලා තියෙන්නේ.
         setTimeout(() => {
-            // Random formatted Pair Code generation for simulation
-            const randomCode = generateRandomPairCode();
+            const code = generateDummyCode();
             
-            resultDiv.innerHTML = `
-                <div style="margin-top: 15px;">
-                    <p style="color: #aaa; font-size: 0.85rem;">Your WhatsApp Pair Code:</p>
-                    <div class="pair-code-display">
-                        <span id="code-text">${randomCode}</span>
-                        <button class="copy-btn" onclick="copyPairCode('${randomCode}')">
-                            <i class="fa-solid fa-copy"></i> Copy
-                        </button>
-                    </div>
-                    <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">
-                        Open WhatsApp -> Linked Devices -> Link with Phone Number and enter the code above.
-                    </p>
-                </div>
-            `;
+            loadingDiv.style.display = 'none';
+            resultContainer.style.display = 'block';
+            submitBtn.style.display = 'block';
+            
+            pairCodeDisplay.innerText = code;
         }, 2000);
 
     } catch (error) {
-        resultDiv.innerHTML = `<p style="color: #ff5252; margin-top: 15px;">Failed to generate code. Please try again later.</p>`;
+        alert("Error generating pair code. Please try again.");
+        loadingDiv.style.display = 'none';
+        submitBtn.style.display = 'block';
     }
 }
 
-// Utility: Copy Pair Code to Clipboard
-function copyPairCode(code) {
-    navigator.clipboard.writeText(code);
-    alert("Pair Code Copied: " + code);
+function generateDummyCode() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
+    for (let i = 0; i < 8; i++) {
+        if (i === 4) code += "-";
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
 }
 
-// Utility: Dummy Pair Code Generator
-function generateRandomPairCode() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let part1 = "", part2 = "";
-    for (let i = 0; i < 4; i++) part1 += chars.charAt(Math.floor(Math.random() * chars.length));
-    for (let i = 0; i < 4; i++) part2 += chars.charAt(Math.floor(Math.random() * chars.length));
-    return `${part1}-${part2}`;
+function copyCode() {
+    const codeText = document.getElementById('pairCodeDisplay').innerText;
+    if (codeText && codeText !== "----") {
+        navigator.clipboard.writeText(codeText);
+        alert("Pair Code Copied to Clipboard!");
+    }
+}
+
+// ඔයා කලින් ඉල්ලපු විදිහට WhatsApp එකට මැසේජ් එක යන "Buy Bot" Function එක
+function buyBot() {
+    const phoneNumber = "94741933159"; // ඔයාගේ නම්බර් එක
+    const message = "Hello QUEENHANSI-MD,\nI want to buy the Bot Script. Please provide the details.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 }
