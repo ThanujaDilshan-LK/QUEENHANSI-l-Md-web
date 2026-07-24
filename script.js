@@ -1,65 +1,54 @@
-async function getPairCode() {
-    const phoneInput = document.getElementById('phoneNumber').value.trim();
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingDiv = document.getElementById('loading');
-    const resultContainer = document.getElementById('resultContainer');
-    const pairCodeDisplay = document.getElementById('pairCodeDisplay');
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("QUEENHANSI-MD Website Loaded Successfully!");
 
-    // Phone number validation
-    if (!phoneInput) {
-        alert("Please enter your WhatsApp number.");
+    // Link card click effect enhancements (Optional smooth handling)
+    const cards = document.querySelectorAll('.link-card');
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // ඔබට අවශ්‍ය නම් click කරන විට වෙනත් විශේෂ ක්‍රියාවක් (effects) මෙතැනට එකතු කළ හැක
+        });
+    });
+});
+
+// Pair Code Page එක සඳහා (Pair.html එකේදී භාවිතා කිරීමට)
+async function getPairCode() {
+    const phoneInput = document.getElementById('phone');
+    const waitingDiv = document.getElementById('waiting');
+    const codeDisplay = document.getElementById('code-display');
+
+    if (!phoneInput) return;
+
+    const phone = phoneInput.value.trim();
+
+    if (!phone) {
+        alert('කරුණාකර රටේ කේතය සමඟ ඔබේ වට්ස්ඇප් අංකය ඇතුළත් කරන්න! (උදා: 9477xxxxxxx)');
         return;
     }
 
-    // Hide previous results & show loading
-    submitBtn.style.display = 'none';
-    resultContainer.style.display = 'none';
-    loadingDiv.style.display = 'block';
+    if (waitingDiv) waitingDiv.style.display = 'block';
+    if (codeDisplay) codeDisplay.innerHTML = '';
 
     try {
-        // මෙතනට ඔයාගේ Backend API ලින්ක් එක දාන්න පුළුවන් (e.g., Render URL)
-        // const response = await fetch(`https://your-api.onrender.com/code?number=${phoneInput}`);
+        // ඔබගේ බොට් සර්වර් හෝ API ලින්ක් එක මෙතැනට ලබා දෙන්න
+        const response = await fetch(`/pair?phone=${phone}`);
+        const data = await response.json();
+
+        if (waitingDiv) waitingDiv.style.display = 'none';
         
-        // Backend එකක් නැති නිසා, තත්පර 2කින් Code එකක් generate වෙන විදිහට හදලා තියෙන්නේ.
-        setTimeout(() => {
-            const code = generateDummyCode();
+        if (data.code && codeDisplay) {
+            codeDisplay.innerHTML = data.code;
             
-            loadingDiv.style.display = 'none';
-            resultContainer.style.display = 'block';
-            submitBtn.style.display = 'block';
-            
-            pairCodeDisplay.innerText = code;
-        }, 2000);
-
+            // Code එක Automatic Copy කරගැනීමට අවශ්‍ය නම්
+            navigator.clipboard.writeText(data.code).then(() => {
+                console.log('Pair code copied to clipboard!');
+            });
+        } else if (codeDisplay) {
+            codeDisplay.innerHTML = "Error: Could not get code!";
+        }
     } catch (error) {
-        alert("Error generating pair code. Please try again.");
-        loadingDiv.style.display = 'none';
-        submitBtn.style.display = 'block';
+        if (waitingDiv) waitingDiv.style.display = 'none';
+        if (codeDisplay) {
+            codeDisplay.innerHTML = "Connection Error! Check your backend server.";
+        }
     }
-}
-
-function generateDummyCode() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let code = "";
-    for (let i = 0; i < 8; i++) {
-        if (i === 4) code += "-";
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return code;
-}
-
-function copyCode() {
-    const codeText = document.getElementById('pairCodeDisplay').innerText;
-    if (codeText && codeText !== "----") {
-        navigator.clipboard.writeText(codeText);
-        alert("Pair Code Copied to Clipboard!");
-    }
-}
-
-// ඔයා කලින් ඉල්ලපු විදිහට WhatsApp එකට මැසේජ් එක යන "Buy Bot" Function එක
-function buyBot() {
-    const phoneNumber = "94741933159"; // ඔයාගේ නම්බර් එක
-    const message = "Hello QUEENHANSI-MD,\nI want to buy the Bot Script. Please provide the details.";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
 }
