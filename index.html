@@ -3,56 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUEENHANSI-MD | Pair Code</title>
+    <title>QUEENHANSI-MD - Official Website</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="main-container">
-        <!-- Logo / Title -->
-        <div class="header">
-            <img src="https://github.com/fluidicon.png" alt="Logo" class="logo">
-            <h1>QUEENHANSI-MD</h1>
-            <p>Enter your WhatsApp number to get the Pair Code</p>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="profile-container">
+            <img src="https://i.ibb.co/6n81Vp8/image.png" alt="QUEENHANSI-MD Logo" class="avatar">
+        </div>
+        <h1>QUEENHANSI-MD</h1>
+        <p class="tagline">Next-Generation Multi-Device WhatsApp Bot</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://whatsapp.com/" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://t.me/" target="_blank" class="social-btn"><i class="fa-brands fa-telegram"></i> Telegram</a>
+        </div>
+    </header>
+
+    <!-- Main Content Links / Cards -->
+    <main class="container">
+        <div class="link-card" onclick="window.open('pair.html', '_blank')">
+            <div class="icon-box"><i class="fa-solid fa-qrcode"></i></div>
+            <div class="link-info">
+                <h3>Pair Code Generator</h3>
+                <p>Get your session ID quickly by linking your WhatsApp account.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right arrow"></i>
         </div>
 
-        <!-- Input Section -->
-        <div class="card">
-            <div class="input-group">
-                <span class="icon"><i class="fa-brands fa-whatsapp"></i></span>
-                <input type="text" id="phoneNumber" placeholder="Example: 94741933159" autocomplete="off">
+        <div class="link-card" onclick="window.open('https://github.com/', '_blank')">
+            <div class="icon-box"><i class="fa-solid fa-code-branch"></i></div>
+            <div class="link-info">
+                <h3>Fork / GitHub Repository</h3>
+                <p>Access the full source code and deploy your own bot instance.</p>
             </div>
-            
-            <button class="submit-btn" onclick="getPairCode()" id="submitBtn">
-                GET PAIR CODE
-            </button>
-
-            <!-- Loading Spinner -->
-            <div class="loading" id="loading">
-                <i class="fa-solid fa-circle-notch fa-spin"></i> Generating your code...
-            </div>
-
-            <!-- Result Display -->
-            <div class="result-container" id="resultContainer">
-                <p class="instruction">Your Pair Code is ready!</p>
-                <div class="code-box">
-                    <span id="pairCodeDisplay">----</span>
-                    <button class="copy-btn" onclick="copyCode()"><i class="fa-regular fa-copy"></i></button>
-                </div>
-            </div>
+            <i class="fa-solid fa-chevron-right arrow"></i>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Developed by <span>QUEENHANSI-MD</span> &copy; 2026</p>
-            <div class="social-links">
-                <button onclick="buyBot()" class="buy-link"><i class="fa-solid fa-cart-shopping"></i> Buy Bot Script</button>
+        <div class="link-card" onclick="window.open('https://heroku.com/deploy', '_blank')">
+            <div class="icon-box"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div class="link-info">
+                <h3>Deploy Bot</h3>
+                <p>Deploy QUEENHANSI-MD directly to cloud hosting platforms.</p>
             </div>
+            <i class="fa-solid fa-chevron-right arrow"></i>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <div class="link-card" onclick="window.open('https://wa.me/', '_blank')">
+            <div class="icon-box"><i class="fa-solid fa-headset"></i></div>
+            <div class="link-info">
+                <h3>Contact Owner / Support</h3>
+                <p>Need help? Reach out to the official support channel.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right arrow"></i>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 QUEENHANSI-MD | Developed with <i class="fa-solid fa-heart" style="color: #ef4444;"></i></p>
+    </footer>
+
 </body>
 </html>
